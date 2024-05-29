@@ -1,0 +1,20 @@
+name: Hello World Docker CI
+
+on:
+  push:
+    paths:
+      - '.github/workflows/hello-world-docker-action.yml'
+  workflow_dispatch:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Docker
+        uses: docker/setup-docker@v2
+      - name: Run hello-world-docker-action
+        run: |
+          docker build -t my-hello-world-action .
+          docker run my-hello-world-action
