@@ -16,5 +16,5 @@ jobs:
       #   uses: docker/setup-docker@v2
       - name: Run hello-world-docker-action
         run: |
-          docker build -t my-hello-world-action .
+          docker build -t hello-world-docker-action .
           docker run my-hello-world-action
