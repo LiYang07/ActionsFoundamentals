@@ -1,20 +1,25 @@
-name: Hello World Docker CI
+name: Run my own container action
 
 on:
-  push:
-    paths:
-      - '.github/workflows/hello-world-docker-action.yml'
   workflow_dispatch:
+    inputs:
+      who-to-greet:
+        description: Who to greet in the log
+        required: true
+        default: 'World'
+        type: string
 
 jobs:
-  Build:
+  say-hello:
+    name: Say Hello
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      # - name: Set up Docker
-      #   uses: docker/setup-docker@v2
-      - name: Run hello-world-docker-action
-        run: |
-          docker build -t hello-world-docker-action .
-          docker run my-hello-world-action
+      # Change @main to a specific commit SHA or version tag, e.g.:
+      # actions/hello-world-docker-action@e76147da8e5c81eaf017dede5645551d4b94427b
+      # actions/hello-world-docker-action@v1.2.3
+      - name: Print to Log
+        id: print-to-log
+        uses: actions/hello-world-docker-action@main
+        with:
+          who-to-greet: ${{ inputs.who-to-greet }}
